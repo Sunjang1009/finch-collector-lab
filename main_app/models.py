@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class Corgis(models.Model):
+class Corgi(models.Model):
     name = models.CharField(max_length=100)
     mixes = models.CharField(max_length=250)
     image = models.CharField(max_length=250)

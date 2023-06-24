@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Corgis
+from .models import Corgi
 
 # Register your models here.
-admin.site.register(Corgis)
+admin.site.register(Corgi)
 

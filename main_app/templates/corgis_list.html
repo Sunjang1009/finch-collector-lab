@@ -3,7 +3,7 @@
 Corgis
 {% endblock %}
 {% block content %}
-<h1 class="title pt-5">Trending Artists</h1>
+<h1 class="title pt-5">Welcome to Corgi-mixes</h1>
 
 <!-- search bar -->
 <!-- method = get -->
@@ -19,12 +19,16 @@ Corgis
     </div>
     <!--  This anchor tag will redirect back to corgis list without a query param -->
     <a class="button is-dark" href="{% url 'corgis_list' %}">Clear Search</a>
-  </form>
+    <!-- add a corgi button to create a corgi -->
+    <a class="button is-dark" href="{% url 'corgi_create' %}">Add a Corgi</a>
+</form>
+
 
 <div class="gallery">
 
     {% for corgi in corgis %}
-    <a href="">
+    <a href="{% url 'corgi_detail' corgi.pk %}">
+        
         <div class="card">
           <div class="card-image">
             <figure class="image is-square">

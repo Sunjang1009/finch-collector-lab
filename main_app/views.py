@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
+from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
-from .models import Corgis
+from .models import Corgi
 
 
 
@@ -16,24 +17,7 @@ class Home(TemplateView):
 class About(TemplateView):
     template_name = 'about.html'
 
-# class Corgis:
-#     def __init__(self, name, mixes, image, bio):
-#         self.name = name
-#         self.mixes = mixes
-#         self.image = image
-#         self.bio = bio
 
-# corgis = [
-#     Corgis("Corgsky", "Husky X Corgi",
-#     "https://www.101dogbreeds.com/wp-content/uploads/2018/07/Corgsky.jpg",
-#     "It is friendly, loyal, and gentle, inheriting the fun-loving nature of both its parents, which makes it a great family pet well-suited for all ages." ),
-#     Corgis("Corman Shepherd", "German Shepherd X Corgi", 
-#     "https://www.101dogbreeds.com/wp-content/uploads/2016/11/Corman-Shepherd.jpg",
-#     "Intelligent, smart, and easy to please, they replicate their German Shepherd parent when it comes to being loyal, protective, and dedicated."),
-#     Corgis("Beagi", "Beagle X Corgi", 
-#     "https://www.101dogbreeds.com/wp-content/uploads/2015/09/Beagi.jpg",
-#     "The drooping ears of the Beagle and the striped appearance of the Corgi (on the eyes and nose) make these amicable, intelligent, and loyal dogs immensely adorable. Most of them even display the strong smelling and hunting instincts of both their parents.")
-# ]
 
 class CorgisList(TemplateView):
     template_name = "corgis_list.html"
@@ -44,16 +28,20 @@ class CorgisList(TemplateView):
         # print(self.request.GET)
         name = self.request.GET.get('name')
         if name != None:
-            context["corgis"] = Corgis.objects.filter(name__icontains=name)
+            context["corgis"] = Corgi.objects.filter(name__icontains=name)
 
         else:
-            context["corgis"] = Corgis.objects.all()
+            context["corgis"] = Corgi.objects.all()
         return context
 
 class CorgiCreate(CreateView):
-    model = Corgis
+    model = Corgi
     fields = ['name', 'mixes', 'image', 'bio']
     template_name = 'corgi_create.html'
     # what is that?? redirect 
     success_url = '/corgis/'
+
+class CorgiDetail(DetailView):
+    model = Corgi
+    template_name = "corgi_detail.html"
 
