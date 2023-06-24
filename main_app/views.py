@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView
 from .models import Corgis
 
 
@@ -48,4 +49,11 @@ class CorgisList(TemplateView):
         else:
             context["corgis"] = Corgis.objects.all()
         return context
+
+class CorgiCreate(CreateView):
+    model = Corgis
+    fields = ['name', 'mixes', 'image', 'bio']
+    template_name = 'corgi_create.html'
+    # what is that?? redirect 
+    success_url = '/corgis/'
 
