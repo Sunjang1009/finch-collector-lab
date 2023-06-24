@@ -3,7 +3,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Corgi
 
 
@@ -45,3 +45,10 @@ class CorgiDetail(DetailView):
     model = Corgi
     template_name = "corgi_detail.html"
 
+class CorgiUpdate(UpdateView):
+    model = Corgi
+    fields = ['name', 'mixes', 'image', 'bio']
+    template_name = "corgi_update.html"
+    success_url = '/corgis/'
+
+    
