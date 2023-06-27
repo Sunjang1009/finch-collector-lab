@@ -9,6 +9,7 @@ urlpatterns = [
     path('corgis/<int:pk>/', views.CorgiDetail.as_view(), name="corgi_detail"),
     path('corgis/new/', views.CorgiCreate.as_view(), name="corgi_create"),
     path('corgis/<int:pk>/update/', views.CorgiUpdate.as_view(), name="corgi_update"),
+    path('corgis/<int:pk>/delete/', views.CorgiDelete.as_view(), name="corgi_delete"),
 ]
 
 

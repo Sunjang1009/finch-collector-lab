@@ -1,9 +1,10 @@
+from django.urls import reverse
 from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Corgi
 
 
@@ -16,8 +17,6 @@ class Home(TemplateView):
 
 class About(TemplateView):
     template_name = 'about.html'
-
-
 
 class CorgisList(TemplateView):
     template_name = "corgis_list.html"
@@ -39,7 +38,8 @@ class CorgiCreate(CreateView):
     fields = ['name', 'mixes', 'image', 'bio']
     template_name = 'corgi_create.html'
     # what is that?? redirect 
-    success_url = '/corgis/'
+    def get_success_url(self):
+        return reverse('corgi_detail', kwargs={'pk':self.object.pk})
 
 class CorgiDetail(DetailView):
     model = Corgi
@@ -49,6 +49,12 @@ class CorgiUpdate(UpdateView):
     model = Corgi
     fields = ['name', 'mixes', 'image', 'bio']
     template_name = "corgi_update.html"
-    success_url = '/corgis/'
+    # success_url = '/corgis/'
+    def get_success_url(self):
+        return reverse('corgi_detail', kwargs={'pk':self.object.pk})
 
-    
+class CorgiDelete(DeleteView):
+    model = Corgi
+    template_name = "corgi_delete_confirmation.html"
+    success_url = "/corgis/"
+
