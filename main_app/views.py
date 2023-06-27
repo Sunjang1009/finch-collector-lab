@@ -1,11 +1,12 @@
 from django.urls import reverse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.http import HttpResponse
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Corgi
+from .models import Corgi, Dog
+
 
 
 
@@ -58,3 +59,11 @@ class CorgiDelete(DeleteView):
     template_name = "corgi_delete_confirmation.html"
     success_url = "/corgis/"
 
+class DogCreate(View):
+    def post(self, request, pk):
+        name = request.POST.get("name")
+        weight = request.POST.get("weight")
+        corgi = Corgi.objects.get(pk=pk)
+        Dog.objects.create(name=name, weight=weight, corgi=corgi)
+        return redirect("corgi_detail", pk=pk)
+    

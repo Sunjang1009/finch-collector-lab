@@ -29,6 +29,24 @@
     </div>
     <div class="detail__dogs mb-5">
         <h3 class="name is-3">Dogs</h3>
+        <form class="mb-5" action="{% url 'dog_create' corgi.pk %}" method="post">
+            {% csrf_token %}
+            <div class="field has-addons">
+                <div class="control">
+                    <input class="input" type="text" name="name" placeholder="Dog's Name" required/>
+                </div>
+                <div class="control">
+                    <input class="input" type="number" name="weight" placeholder="Dog's Weight" required>
+                </div>
+                <div class="control">
+                    <input class="input" type="text" name="color" placeholder="Dog's Color" required>
+                </div>
+                <div class="control">
+                    <input class="button is-primary" type="submit"  value="Add a Dog"/>
+                </div>
+            </div>
+        </form>
+
         {% for dog in corgi.dogs.all %}
         <div class="dog">
             <span>{{forloop.counter}}</span>
