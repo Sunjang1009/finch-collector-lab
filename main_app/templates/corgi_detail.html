@@ -27,6 +27,24 @@
             </span>
         </a>
     </div>
+    <div class="detail__dogs mb-5">
+        <h3 class="name is-3">Dogs</h3>
+        {% for dog in corgi.dogs.all %}
+        <div class="dog">
+            <span>{{forloop.counter}}</span>
+            <span><b>{{dog.name}}</b></span>
+            <span>{{dog.weight}}</span>
+            <span>{{dog.color}}</span>
+            <span>{{dog.gender}}</span>
+        </div>
+        {% empty %}
+        <article class="messsage">
+            <div class="message-header">
+                <p>No Dogs Are Registered</p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
     <div class="detail__about">
         <h4 class="title is-4">About</h4>
         <p>{{corgi.bio}}</p>
