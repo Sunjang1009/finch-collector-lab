@@ -5,7 +5,8 @@ from django.http import HttpResponse
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Corgi, Dog
+from .models import Corgi, Dog, Doglist
+
 
 
 
@@ -14,7 +15,12 @@ from .models import Corgi, Dog
 # Home class is child of TemplateView
 # 
 class Home(TemplateView):
-    template_name = 'home.html'
+    template_name = "home.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["doglists"] = Doglist.objects.all()
+        return context
+
 
 class About(TemplateView):
     template_name = 'about.html'

@@ -34,3 +34,9 @@ class Dog(models.Model):
     def __str__(self):
         return self.name
 
+class Doglist(models.Model):
+    name = models.CharField(max_length=150)
+    dogs = models.ManyToManyField(Dog)
+    def __str__(self):
+        return self.name
+

@@ -3,6 +3,22 @@
 corgi-Home
 {% endblock %}
 {% block content %}
-<h1>Finch_Collector Home</h1>
+<div class="home__doglists">
+    {% for doglist in doglists %}
+        <div class="doglist mb-5">
+            <h3 class="title is-3 has-text-success">{{doglist.name}}</h3>
+            <hr />
+            {% for dog in doglist.dogs.all %}
+            <div class="dog">
+                <span>{{forloop.counter}}</span>
+                <span><b>{{dog.name}}</b></span>
+                <span>{{dog.color}}</span>
+            </div>
+            {% endfor %}
+        </div>
+    {% empty %}
+        <div class="doglist mb-5">"There are no dogs in this doglist"</div>
+    {% endfor %}
+</div>
 {% endblock %}
 
