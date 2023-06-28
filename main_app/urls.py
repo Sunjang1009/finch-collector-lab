@@ -11,7 +11,10 @@ urlpatterns = [
     path('corgis/<int:pk>/update/', views.CorgiUpdate.as_view(), name="corgi_update"),
     path('corgis/<int:pk>/delete/', views.CorgiDelete.as_view(), name="corgi_delete"),
     path('corgis/<int:pk>/dogs/new/', views.DogCreate.as_view(), name="dog_create"),
+    path('doglists/<int:pk>/dogs/<int:dog_pk>', views.DoglistDogAssoc.as_view(), name="doglist_dog_assoc"),
 ]
+
+
 
 
 

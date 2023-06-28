@@ -8,9 +8,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Corgi, Dog, Doglist
 
 
-
-
-
 # Create your views here.
 # Home class is child of TemplateView
 # 
@@ -51,6 +48,10 @@ class CorgiCreate(CreateView):
 class CorgiDetail(DetailView):
     model = Corgi
     template_name = "corgi_detail.html"
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context["doglists"] = Doglist.objects.all()
+        return context
 
 class CorgiUpdate(UpdateView):
     model = Corgi
@@ -73,3 +74,11 @@ class DogCreate(View):
         Dog.objects.create(name=name, weight=weight, corgi=corgi)
         return redirect("corgi_detail", pk=pk)
     
+class DoglistDogAssoc(View):
+    def get(self, request, pk, dog_pk):
+        assoc = request.GET.get("assoc")
+        if assoc == "remove":
+            Doglist.objects.get(pk=pk).dogs.remove(dog_pk)
+        if assoc == "add":
+            Doglist.objects.get(pk=pk).dogs.add(dog_pk)
+        return redirect("home")

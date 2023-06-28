@@ -13,6 +13,13 @@ corgi-Home
                 <span>{{forloop.counter}}</span>
                 <span><b>{{dog.name}}</b></span>
                 <span>{{dog.color}}</span>
+                <span>
+                    <a href="{% url 'doglist_dog_assoc' doglist.pk dog.pk %}?assoc=remove" class="button is-danger is-outlined">
+                        <span class="icon is-small">
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </a>
+                </span>
             </div>
             {% endfor %}
         </div>
